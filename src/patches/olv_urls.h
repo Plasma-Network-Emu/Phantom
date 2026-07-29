@@ -17,10 +17,8 @@
 #include <cstdlib>
 #include "inkay_config.h"
 
-constexpr char original_url[] = "discovery.olv.nintendo.net/v1/endpoint";
-constexpr char new_url[] =      "discovery.olv." NETWORK_BASEURL "/v1/endpoint";
-
-_Static_assert(sizeof(original_url) > sizeof(new_url),
-               "new_url too long! Must be less than 38chars.");
+// discovery.olv redirect disabled: the replacement is longer than the
+// space the original string occupies for any domain longer than
+// pretendo.cc, and this isn't a service that's served here anyway.
 
 bool setup_olv_libs();

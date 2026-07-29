@@ -31,8 +31,8 @@
 
 #include "ca_pem.h" // generated at buildtime
 
-constexpr char wave_original[] = "https://ninja.wup.shop.nintendo.net/ninja/wood_index.html?";
-constexpr char wave_new[] =      "http://samurai.wup.shop." NETWORK_BASEURL "/ninja/wood_index.html?";
+// wave redirect disabled: too long to fit for any domain longer than
+// pretendo.cc.
 
 struct eshop_allowlist {
     char scheme[16];
@@ -72,9 +72,6 @@ DECL_FUNCTION(int, FSOpenFile_eShop, FSClient *client, FSCmdBlock *block, char *
         //we do it when loading this file since it should only load once, preventing massive lag spikes as it searches all of MEM2 xD
 
         DEBUG_FUNCTION_LINE_VERBOSE("Inkay: hewwo eShop!\n");
-
-        if (!replace(0x10000000, 0x10000000, wave_original, sizeof(wave_original), wave_new, sizeof(wave_new)))
-            DEBUG_FUNCTION_LINE_VERBOSE("Inkay: We didn't find the url /)>~<(\\");
 
         if (!replace(0x10000000, 0x10000000, (const char *)&original_entry, sizeof(original_entry), (const char *)&new_entry, sizeof(new_entry)))
             DEBUG_FUNCTION_LINE_VERBOSE("Inkay: We didn't find the whitelist /)>~<(\\");

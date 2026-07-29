@@ -59,7 +59,7 @@ void new_rpl_loaded(OSDynLoad_Module module, void* ctx, OSDynLoad_NotifyReason r
     if (reason != OS_DYNLOAD_NOTIFY_LOADED) return;
     if (!rpl->name || !path_is_olv(rpl->name)) return;
 
-    replace(rpl->dataAddr, rpl->dataSize, original_url, sizeof(original_url), new_url, sizeof(new_url));
+    // discovery.olv redirect disabled - see olv_urls.h
 }
 
 bool setup_olv_libs() {
@@ -76,12 +76,6 @@ bool setup_olv_libs() {
         return false;
     }
 
-    //wish there was a better way than "blow through MEM2"
-    uint32_t base_addr, size;
-    if (OSGetMemBound(OS_MEM2, &base_addr, &size)) {
-        DEBUG_FUNCTION_LINE("Inkay: OSGetMemBound failed!");
-        return false;
-    }
-
-    return replace(base_addr, size, original_url, sizeof(original_url), new_url, sizeof(new_url));
+    // discovery.olv redirect disabled - see olv_urls.h
+    return false;
 }

@@ -57,9 +57,8 @@ constexpr struct account_settings_allowlist new_entry = {
     .path = "",
     .flags = 0x01010101,
 };
-constexpr char wave_original[] = "saccount.nintendo.net";
-
-constexpr char wave_new[] =      "saccount." NETWORK_BASEURL;
+// saccount redirect disabled: too long to fit for any domain longer
+// than pretendo.cc.
 
 static bool isAccountSettingsTitle() {
     return (OSGetTitleID() != 0 && (
@@ -148,11 +147,6 @@ bool hotpatchAccountSettings() {
     }
 
     DEBUG_FUNCTION_LINE_VERBOSE("Inkay: hewwo account settings!\n");
-
-    if (!replace(0x10000000, 0x10000000, wave_original, sizeof(wave_original), wave_new, sizeof(wave_new))) {
-        DEBUG_FUNCTION_LINE("Inkay: We didn't find the url /)>~<(\\");
-        return false;
-    }
 
     if (!replace(0x10000000, 0x10000000, (const char *)&original_entry, sizeof(original_entry), (const char *)&new_entry, sizeof(new_entry))) {
         DEBUG_FUNCTION_LINE("Inkay: We didn't find the whitelist /)>~<(\\");
